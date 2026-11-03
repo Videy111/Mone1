@@ -1,1456 +1,934 @@
 <!DOCTYPE html>
-<html lang="id">
-
+<html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-<meta name="theme-color" content="#070812">
-
-<title>TERBARU</title>
+<title>VIDHUB — Video Discovery</title>
 
 <meta name="description"
-      content="Tonton video terbaru dan video lainnya.">
+content="Discover trending videos, latest uploads and popular content on VIDHUB.">
+<meta name="robots" content="index, follow">
 
-
-<!-- =========================
-     OPEN GRAPH / FACEBOOK
-========================= -->
-
-<meta property="og:type"
-      content="website">
-
-<meta property="og:title"
-      content="Video Terbaru">
-
-<meta property="og:description"
-      content="Tonton video terbaru dan video lainnya.">
-
-<meta property="og:image"
-      content="https://jpcdn.it/img/367f757d56a58ec679a6397531a5d68c.jpg">
-
-<meta property="og:image:alt"
-      content="Video Terbaru">
-
-<meta property="og:image:width"
-      content="1200">
-
-<meta property="og:image:height"
-      content="630">
-
-<meta property="og:url"
-      content="https://videy111.github.io/">
-
-<meta property="og:site_name"
-      content="Video Player">
-
-
-<!-- =========================
-     TWITTER / X
-========================= -->
-
-<meta name="twitter:card"
-      content="summary_large_image">
-
-<meta name="twitter:title"
-      content="Video Terbaru">
-
-<meta name="twitter:description"
-      content="Tonton video terbaru dan video lainnya.">
-
-<meta name="twitter:image"
-      content="https://jpcdn.it/img/367f757d56a58ec679a6397531a5d68c.jpg">
-
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="VIDHUB — Video Discovery">
+<meta property="og:description" content="Discover trending and popular videos.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200">
+<meta property="og:url" content="https://example.com/">
 
 <style>
-
-:root{
-  --bg:#070812;
-  --panel:rgba(18,20,35,.84);
-  --text:#f7f8ff;
-  --muted:#9ca3b8;
-  --line:rgba(255,255,255,.09);
-  --purple:#8b5cf6;
-  --blue:#38bdf8;
-  --pink:#ec4899;
-  --radius:20px;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+body {
+    background: #0b0b0d;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-html{
-  background:var(--bg);
-  scroll-behavior:smooth;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-body{
-  min-height:100vh;
-  color:var(--text);
-
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
-
-  background:
-    radial-gradient(
-      circle at 15% 0%,
-      rgba(139,92,246,.20),
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 90% 10%,
-      rgba(56,189,248,.13),
-      transparent 28%
-    ),
-
-    radial-gradient(
-      circle at 50% 65%,
-      rgba(236,72,153,.08),
-      transparent 32%
-    ),
-
-    linear-gradient(
-      145deg,
-      #070812 0%,
-      #0b0d18 48%,
-      #070812 100%
-    );
+/* HEADER */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(11,11,13,.96);
+    border-bottom: 1px solid #222;
+    backdrop-filter: blur(12px);
 }
 
-button{
-  font:inherit;
+.header-inner {
+    max-width: 1250px;
+    margin: auto;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 0 18px;
 }
 
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:30;
-
-  height:64px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  padding:0 18px;
-
-  background:rgba(7,8,18,.72);
-
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-
-  border-bottom:1px solid var(--line);
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    white-space: nowrap;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:800;
+.logo span {
+    color: #ff1744;
 }
 
-.brand-mark{
-  width:35px;
-  height:35px;
-
-  border-radius:11px;
-
-  display:grid;
-  place-items:center;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--blue)
-    );
-
-  box-shadow:
-    0 8px 25px rgba(139,92,246,.28);
+.search {
+    flex: 1;
+    max-width: 520px;
+    margin: auto;
 }
 
-.share-top{
-  width:40px;
-  height:40px;
-
-  border:1px solid var(--line);
-  border-radius:13px;
-
-  color:#fff;
-
-  background:rgba(255,255,255,.05);
-
-  cursor:pointer;
+.search input {
+    width: 100%;
+    background: #18181b;
+    border: 1px solid #29292d;
+    color: #fff;
+    padding: 13px 18px;
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
 }
 
-
-/* =========================
-   MAIN
-========================= */
-
-main{
-  width:min(1060px,100%);
-  margin:auto;
-  padding:22px 16px 52px;
+.search input:focus {
+    border-color: #ff1744;
 }
 
-
-/* =========================
-   PLAYER
-========================= */
-
-.player-shell{
-  position:relative;
-  overflow:hidden;
-
-  background:#000;
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-  border-radius:var(--radius);
-
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.45),
-    0 0 55px rgba(99,102,241,.08);
+.header-button {
+    background: #ff1744;
+    border: 0;
+    color: white;
+    padding: 11px 17px;
+    border-radius: 8px;
+    font-weight: 700;
 }
 
-video{
-  display:block;
-
-  width:100%;
-
-  aspect-ratio:16/10;
-
-  object-fit:contain;
-
-  background:#000;
+/* NAV */
+.nav {
+    border-bottom: 1px solid #1d1d20;
+    overflow-x: auto;
 }
 
-.video-top-gradient{
-  position:absolute;
-
-  inset:0 0 auto;
-
-  height:105px;
-
-  pointer-events:none;
-
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0,0,0,.55),
-      transparent
-    );
+.nav-inner {
+    max-width: 1250px;
+    margin: auto;
+    padding: 11px 18px;
+    display: flex;
+    gap: 10px;
 }
 
-.video-bottom-gradient{
-  position:absolute;
-
-  inset:auto 0 0;
-
-  height:120px;
-
-  pointer-events:none;
-
-  background:
-    linear-gradient(
-      to top,
-      rgba(0,0,0,.72),
-      transparent
-    );
+.nav a {
+    white-space: nowrap;
+    background: #171719;
+    border: 1px solid #27272a;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 13px;
 }
 
-.player-badge{
-  position:absolute;
-
-  top:13px;
-  left:13px;
-
-  z-index:3;
-
-  padding:7px 10px;
-
-  border-radius:999px;
-
-  font-size:11px;
-  font-weight:700;
-
-  background:rgba(8,9,18,.62);
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  backdrop-filter:blur(10px);
+.nav a.active,
+.nav a:hover {
+    background: #ff1744;
+    border-color: #ff1744;
 }
 
-
-/* =========================
-   CUSTOM CONTROLS
-========================= */
-
-.controls{
-  position:absolute;
-
-  left:14px;
-  right:14px;
-  bottom:12px;
-
-  z-index:4;
-
-  display:flex;
-  align-items:center;
-
-  gap:9px;
+/* MAIN */
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 25px 18px 60px;
 }
 
-.ctrl{
-  width:40px;
-  height:38px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.13);
-
-  border-radius:11px;
-
-  background:rgba(10,11,18,.64);
-
-  color:#fff;
-
-  display:grid;
-  place-items:center;
-
-  cursor:pointer;
-
-  backdrop-filter:blur(10px);
+.hero {
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.9), rgba(0,0,0,.25)),
+        url("https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1600")
+        center/cover;
+    min-height: 310px;
+    border-radius: 15px;
+    display: flex;
+    align-items: flex-end;
+    padding: 35px;
+    margin-bottom: 35px;
 }
 
-.progress{
-  flex:1;
-
-  height:5px;
-
-  border-radius:99px;
-
-  background:rgba(255,255,255,.22);
-
-  overflow:hidden;
-
-  cursor:pointer;
+.hero-content {
+    max-width: 600px;
 }
 
-.progress-fill{
-  width:0%;
-  height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--purple),
-      var(--blue)
-    );
-
-  border-radius:99px;
+.hero-label {
+    color: #ff1744;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
-.time{
-  font-size:11px;
-  color:#fff;
-
-  min-width:70px;
-
-  text-align:center;
+.hero h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
 }
 
-
-/* =========================
-   CUSTOM FULLSCREEN
-========================= */
-
-.player-shell.is-fullscreen{
-  border-radius:0;
-  border:0;
-
-  width:100vw;
-  height:100vh;
-
-  background:#000;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
+.hero p {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
-.player-shell.is-fullscreen video{
-  width:100%;
-  height:100%;
-
-  max-height:100vh;
-
-  aspect-ratio:auto;
+.watch-btn {
+    display: inline-block;
+    background: #ff1744;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-weight: bold;
 }
 
-.player-shell.is-fullscreen .controls{
-  bottom:18px;
+/* SECTION */
+.section {
+    margin-top: 38px;
 }
 
-
-/* =========================
-   CONTINUE OVERLAY
-========================= */
-
-.continue-overlay{
-  position:absolute;
-
-  inset:0;
-
-  z-index:15;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    rgba(3,4,10,.66);
-
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
 }
 
-.continue-overlay.show{
-  display:flex;
+.section-header h2 {
+    font-size: 22px;
 }
 
-.continue-box{
-  width:min(430px,100%);
-
-  padding:27px 23px 23px;
-
-  text-align:center;
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  border-radius:22px;
-
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      rgba(139,92,246,.22),
-      transparent 52%
-    ),
-
-    rgba(13,15,27,.94);
-
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.55);
+.section-header a {
+    color: #aaa;
+    font-size: 13px;
 }
 
-.ad-icon{
-  width:48px;
-  height:48px;
-
-  margin:0 auto 14px;
-
-  border-radius:15px;
-
-  display:grid;
-  place-items:center;
-
-  color:#fff;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--blue)
-    );
-
-  font-size:20px;
+/* VIDEO GRID */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
 }
 
-.continue-box h2{
-  font-size:21px;
-  line-height:1.2;
+.card {
+    min-width: 0;
 }
 
-.continue-box p{
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.55;
-
-  margin:9px 0 18px;
+.thumbnail {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #18181b;
 }
 
-.ad-button{
-  display:block;
-
-  width:100%;
-
-  padding:12px 16px;
-
-  border-radius:13px;
-
-  color:#fff;
-
-  font-weight:800;
-
-  text-decoration:none;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      #6366f1,
-      var(--blue)
-    );
-
-  box-shadow:
-    0 10px 30px
-    rgba(99,102,241,.25);
-
-  border:0;
-
-  cursor:pointer;
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s;
 }
 
-.small-note{
-  font-size:10px;
-
-  color:#71778b;
-
-  margin-top:10px;
+.card:hover .thumbnail img {
+    transform: scale(1.04);
 }
 
-
-/* =========================
-   INFO
-========================= */
-
-.info{
-  padding:20px 2px 0;
+.duration {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    background: rgba(0,0,0,.85);
+    padding: 4px 7px;
+    border-radius: 4px;
+    font-size: 11px;
 }
 
-.title{
-  font-size:
-    clamp(21px,3vw,30px);
-
-  line-height:1.2;
-
-  letter-spacing:-.5px;
+.play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,23,68,.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: .25s;
 }
 
-.meta{
-  margin-top:8px;
-
-  color:var(--muted);
-
-  font-size:13px;
+.card:hover .play {
+    opacity: 1;
 }
 
-.divider{
-  height:1px;
-
-  background:var(--line);
-
-  margin:22px 0 0;
+.play::after {
+    content: "";
+    margin-left: 3px;
+    border-left: 13px solid white;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
 }
 
-
-/* =========================
-   COLLECTION
-========================= */
-
-.collection{
-  padding:24px 0 4px;
+.card h3 {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 10px;
 }
 
-.collection-heading{
-  text-align:center;
-
-  margin:0 auto 18px;
+.meta {
+    color: #888;
+    font-size: 11px;
+    margin-top: 6px;
 }
 
-.collection-heading h2{
-  font-size:
-    clamp(23px,5vw,30px);
-
-  line-height:1.15;
-
-  letter-spacing:-.5px;
+/* AD AREA */
+.ad {
+    min-height: 90px;
+    margin: 35px auto;
+    max-width: 728px;
+    background: #111113;
+    border: 1px dashed #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 11px;
 }
 
-.collection-heading p{
-  color:var(--muted);
-
-  font-size:13px;
-
-  margin-top:7px;
+/* FOOTER */
+footer {
+    border-top: 1px solid #222;
+    color: #777;
+    text-align: center;
+    padding: 30px 15px;
+    font-size: 12px;
 }
 
-.collection-banner{
-  width:100%;
+/* MOBILE */
+@media(max-width:900px) {
+    .video-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
-  min-height:105px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.28);
-
-  border-radius:20px;
-
-  padding:18px 14px;
-
-  color:#fff;
-
-  cursor:pointer;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:8px;
-
-  text-decoration:none;
-
-  background:
-    linear-gradient(
-      115deg,
-      #1685ff 0%,
-      #5569ff 38%,
-      #9c3bea 68%,
-      #df19bd 100%
-    );
-
-  box-shadow:
-    0 12px 34px
-    rgba(77,74,255,.24),
-
-    inset 0 1px 0
-    rgba(255,255,255,.28);
-
-  transition:
-    transform .2s,
-    filter .2s;
+    .hero h1 {
+        font-size: 30px;
+    }
 }
 
-.collection-banner:hover{
-  transform:translateY(-2px);
+@media(max-width:650px) {
 
-  filter:brightness(1.05);
+    .header-inner {
+        gap: 10px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .header-button {
+        display: none;
+    }
+
+    .search {
+        max-width: none;
+    }
+
+    .container {
+        padding: 18px 12px 50px;
+    }
+
+    .hero {
+        min-height: 250px;
+        padding: 23px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero p {
+        font-size: 13px;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .card h3 {
+        font-size: 13px;
+    }
+
+    .play {
+        width: 40px;
+        height: 40px;
+    }
 }
-
-.collection-banner strong{
-  font-size:
-    clamp(23px,5.5vw,31px);
-
-  line-height:1.1;
-
-  letter-spacing:.2px;
-}
-
-.collection-banner span{
-  font-size:14px;
-
-  font-weight:750;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-  text-align:center;
-
-  color:#73798c;
-
-  font-size:12px;
-
-  padding:18px 0 0;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-  .topbar{
-    height:58px;
-    padding:0 12px;
-  }
-
-  main{
-    padding:12px 10px 40px;
-  }
-
-  .player-shell{
-    border-radius:15px;
-  }
-
-  video{
-    aspect-ratio:5/4;
-  }
-
-  .controls{
-    left:9px;
-    right:9px;
-    bottom:8px;
-  }
-
-  .ctrl{
-    width:36px;
-    height:35px;
-  }
-
-  .time{
-    font-size:10px;
-    min-width:56px;
-  }
-
-  .info{
-    padding-top:16px;
-  }
-
-  .collection{
-    padding:15px;
-    border-radius:17px;
-  }
-
-  .continue-box{
-    padding:23px 17px 18px;
-  }
-
-  .collection-banner strong{
-    gap:7px;
-
-    font-size:
-      clamp(18px,5vw,25px);
-  }
-
-  .collection-banner .arrow{
-    font-size:
-      clamp(18px,5vw,25px);
-  }
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
+<header class="header">
+    <div class="header-inner">
 
-<!-- =========================
-     TOP BAR
-========================= -->
+        <a href="#" class="logo">
+            VID<span>HUB</span>
+        </a>
 
-<header class="topbar">
+        <div class="search">
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search videos..."
+                onkeyup="searchVideos()">
+        </div>
 
-  <div class="brand">
+        <button class="header-button">
+            Explore
+        </button>
 
-    <div class="brand-mark">
-      ▶
     </div>
-
-    <span>
-      Video Player
-    </span>
-
-  </div>
-
-
-  <button
-    class="share-top"
-    type="button"
-    onclick="sharePage()"
-    aria-label="Bagikan">
-
-    ↗
-
-  </button>
-
 </header>
 
 
+<nav class="nav">
+    <div class="nav-inner">
 
-<main>
-
-
-<!-- =========================
-     VIDEO PLAYER
-========================= -->
-
-<section
-  class="player-shell"
-  id="playerShell">
-
-
-  <video
-    id="video"
-    playsinline
-    preload="metadata"
-    src="https://cdn2.videy.co/WgAfG3HX1.mp4">
-  </video>
-
-
-  <div class="video-top-gradient"></div>
-
-  <div class="video-bottom-gradient"></div>
-
-
-  <div class="player-badge">
-    HD • Mobile Friendly
-  </div>
-
-
-  <!-- =========================
-       AD CONTINUE OVERLAY
-  ========================= -->
-
-  <div
-    class="continue-overlay"
-    id="continueOverlay">
-
-
-    <div class="continue-box">
-
-
-      <div class="ad-icon">
-        ▶
-      </div>
-
-
-      <h2>
-        Lanjutkan Video
-      </h2>
-
-
-      <p>
-
-        Tonton iklan terlebih dahulu
-        untuk melanjutkan video.
-
-        Setelah tombol ditekan,
-        iklan akan dibuka dan video
-        dapat dilanjutkan.
-
-      </p>
-
-
-      <a
-        class="ad-button"
-        id="adButton"
-
-        href="https://www.profitableratecpmnetwork.com/dzth71h9?key=0d1e630d97de4d34d79e6dd18d6a2fe8"
-
-        target="_blank"
-
-        rel="noopener noreferrer"
-
-        onclick="continueAfterAd()">
-
-        Lanjutkan &amp; Tonton Iklan
-
-      </a>
-
-
-      <div class="small-note">
-
-        Iklan dibuka setelah kamu
-        menekan tombol.
-
-      </div>
-
+        <a href="#" class="active">Home</a>
+        <a href="#trending">Trending</a>
+        <a href="#latest">Latest</a>
+        <a href="#popular">Popular</a>
+        <a href="#music">Music</a>
+        <a href="#sports">Sports</a>
+        <a href="#entertainment">Entertainment</a>
 
     </div>
-
-  </div>
-
-
-  <!-- =========================
-       CUSTOM CONTROLS
-  ========================= -->
-
-  <div class="controls">
+</nav>
 
 
-    <button
-      class="ctrl"
-      id="playBtn"
-      type="button"
-      onclick="togglePlay()">
-
-      ▶
-
-    </button>
+<main class="container">
 
 
-    <div
-      class="progress"
-      onclick="seekVideo(event)">
+<!-- HERO -->
+<section class="hero">
 
-      <div
-        class="progress-fill"
-        id="progressFill">
-      </div>
+    <div class="hero-content">
+
+        <div class="hero-label">
+            Featured Video
+        </div>
+
+        <h1>
+            Discover Something New
+        </h1>
+
+        <p>
+            Explore trending videos, latest uploads and popular
+            content from around the world.
+        </p>
+
+        <!-- GANTI LINK VIDEO DI SINI -->
+        <a href="#video-player" class="watch-btn">
+            ▶ Watch Now
+        </a>
 
     </div>
-
-
-    <div
-      class="time"
-      id="time">
-
-      0:00 / 0:00
-
-    </div>
-
-
-    <button
-      class="ctrl"
-      type="button"
-      onclick="toggleFullscreen()"
-      aria-label="Fullscreen">
-
-      ⛶
-
-    </button>
-
-
-  </div>
-
 
 </section>
 
 
+<!-- TRENDING -->
+<section class="section" id="trending">
 
-<!-- =========================
-     VIDEO INFO
-========================= -->
+    <div class="section-header">
+        <h2>🔥 Trending Now</h2>
+        <a href="#">View All</a>
+    </div>
 
-<section class="info">
+    <div class="video-grid">
 
-  <h1 class="title">
-    Video Terbaru
-  </h1>
 
-  <div class="meta">
+        <!-- VIDEO 1 -->
+        <article class="card" data-title="Amazing Travel Adventure">
 
-    Nikmati video dengan tampilan
-    nyaman di HP maupun desktop.
+            <a href="#video-player">
 
-  </div>
+                <div class="thumbnail">
+
+                    <!-- GANTI THUMBNAIL -->
+                    <img
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800"
+                    alt="Amazing Travel Adventure">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        08:42
+                    </span>
+
+                </div>
+
+                <h3>
+                    Amazing Travel Adventure
+                </h3>
+
+                <div class="meta">
+                    125K views • 2 hours ago
+                </div>
+
+            </a>
+
+        </article>
+
+
+        <!-- VIDEO 2 -->
+        <article class="card" data-title="Beautiful City Experience">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800"
+                    alt="Beautiful City Experience">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        12:18
+                    </span>
+
+                </div>
+
+                <h3>
+                    Beautiful City Experience
+                </h3>
+
+                <div class="meta">
+                    98K views • 4 hours ago
+                </div>
+
+            </a>
+
+        </article>
+
+
+        <!-- VIDEO 3 -->
+        <article class="card" data-title="Relaxing Nature Video">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800"
+                    alt="Relaxing Nature Video">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        06:31
+                    </span>
+
+                </div>
+
+                <h3>
+                    Relaxing Nature Video
+                </h3>
+
+                <div class="meta">
+                    82K views • 6 hours ago
+                </div>
+
+            </a>
+
+        </article>
+
+
+        <!-- VIDEO 4 -->
+        <article class="card" data-title="Amazing Ocean View">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800"
+                    alt="Amazing Ocean View">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        10:25
+                    </span>
+
+                </div>
+
+                <h3>
+                    Amazing Ocean View
+                </h3>
+
+                <div class="meta">
+                    71K views • 8 hours ago
+                </div>
+
+            </a>
+
+        </article>
+
+
+    </div>
 
 </section>
 
 
-
-<div class="divider"></div>
-
-
-
-<!-- =========================
-     VIDEO COLLECTION
-========================= -->
-
-<section
-  class="collection"
-  id="collection">
+<!-- AD SLOT -->
+<div class="ad">
+    ADVERTISEMENT — 728 × 90
+</div>
 
 
-  <div class="collection-heading">
+<!-- LATEST -->
+<section class="section" id="latest">
 
-    <h2>
-      ✨ Video Lainnya
-    </h2>
+    <div class="section-header">
+        <h2>✨ Latest Videos</h2>
+        <a href="#">View All</a>
+    </div>
 
-    <p>
-      Kumpulan video terbaru dan video pilihan
-    </p>
-
-  </div>
+    <div class="video-grid">
 
 
-  <!--
-    KUMPULAN VIDEO
-    langsung membuka dark link
-  -->
-
-  <a
-    class="collection-banner"
-
-    href="https://www.profitableratecpmnetwork.com/dzth71h9?key=0d1e630d97de4d34d79e6dd18d6a2fe8"
-
-    target="_blank"
-
-    rel="noopener noreferrer">
+        <!--
+        COPY CARD INI UNTUK MENAMBAHKAN VIDEO BARU
+        -->
 
 
-    <strong>
+        <article class="card" data-title="Latest Video One">
 
-      <span class="arrow">
-        ➡️
-      </span>
+            <a href="#video-player">
 
-      <span class="banner-title">
-        KUMPULAN VIDEO
-      </span>
+                <div class="thumbnail">
 
-      <span class="arrow">
-        ⬅️
-      </span>
+                    <!-- GANTI GAMBAR -->
+                    <img
+                    src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800"
+                    alt="Latest Video One">
 
-    </strong>
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        05:44
+                    </span>
+
+                </div>
+
+                <h3>
+                    Latest Video One
+                </h3>
+
+                <div class="meta">
+                    32K views • 20 minutes ago
+                </div>
+
+            </a>
+
+        </article>
 
 
-    <span>
-      🎬 Lihat video lainnya di sini
-    </span>
+        <article class="card" data-title="Latest Video Two">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800"
+                    alt="Latest Video Two">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        09:12
+                    </span>
+
+                </div>
+
+                <h3>
+                    Latest Video Two
+                </h3>
+
+                <div class="meta">
+                    24K views • 1 hour ago
+                </div>
+
+            </a>
+
+        </article>
 
 
-  </a>
+        <article class="card" data-title="Latest Video Three">
 
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800"
+                    alt="Latest Video Three">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        07:35
+                    </span>
+
+                </div>
+
+                <h3>
+                    Latest Video Three
+                </h3>
+
+                <div class="meta">
+                    18K views • 2 hours ago
+                </div>
+
+            </a>
+
+        </article>
+
+
+        <article class="card" data-title="Latest Video Four">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800"
+                    alt="Latest Video Four">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        11:02
+                    </span>
+
+                </div>
+
+                <h3>
+                    Latest Video Four
+                </h3>
+
+                <div class="meta">
+                    16K views • 3 hours ago
+                </div>
+
+            </a>
+
+        </article>
+
+
+    </div>
 
 </section>
 
 
+<!-- POPULAR -->
+<section class="section" id="popular">
 
-<footer>
+    <div class="section-header">
+        <h2>⭐ Popular Videos</h2>
+        <a href="#">View All</a>
+    </div>
 
-  © 2026 • Video Player
+    <div class="video-grid">
 
-</footer>
+
+        <article class="card" data-title="Popular Video">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800"
+                    alt="Popular Video">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        14:20
+                    </span>
+
+                </div>
+
+                <h3>
+                    Popular Video
+                </h3>
+
+                <div class="meta">
+                    1.2M views
+                </div>
+
+            </a>
+
+        </article>
+
+
+        <article class="card" data-title="Top Video">
+
+            <a href="#video-player">
+
+                <div class="thumbnail">
+
+                    <img
+                    src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800"
+                    alt="Top Video">
+
+                    <div class="play"></div>
+
+                    <span class="duration">
+                        09:54
+                    </span>
+
+                </div>
+
+                <h3>
+                    Top Video
+                </h3>
+
+                <div class="meta">
+                    845K views
+                </div>
+
+            </a>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- SECOND AD -->
+<div class="ad">
+    ADVERTISEMENT — 728 × 90
+</div>
+
+
+<!-- PLAYER SECTION -->
+<section id="video-player" class="section">
+
+    <div class="section-header">
+        <h2>▶ Video Player</h2>
+    </div>
+
+    <div style="
+        background:#050505;
+        border-radius:12px;
+        overflow:hidden;
+        border:1px solid #222;
+    ">
+
+        <!--
+        ==========================================
+        GANTI URL VIDEO DI BAWAH INI
+        ==========================================
+        -->
+
+        <video
+            controls
+            playsinline
+            preload="metadata"
+            poster="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200"
+            style="width:100%;display:block;max-height:650px;">
+
+            <!-- GANTI DENGAN URL VIDEO MILIKMU -->
+            <source
+            src="https://cdn.coverr.co/videos/coverr-a-man-walking-in-the-city-1578/1080p.mp4"
+            type="video/mp4">
+
+            Your browser does not support HTML5 video.
+
+        </video>
+
+    </div>
+
+
+    <div style="padding:18px 0;">
+
+        <h2 style="font-size:20px;">
+            Featured Video
+        </h2>
+
+        <p style="
+            color:#888;
+            font-size:13px;
+            margin-top:8px;
+            line-height:1.6;
+        ">
+            Replace this text with your own video description.
+            You can add information about the video here.
+        </p>
+
+        <div style="
+            color:#777;
+            font-size:12px;
+            margin-top:10px;
+        ">
+            125K views • Published today
+        </div>
+
+    </div>
+
+</section>
 
 
 </main>
 
 
+<footer>
+
+    <p>
+        © 2026 VIDHUB. All rights reserved.
+    </p>
+
+    <p style="margin-top:8px;">
+        Home · About · Privacy · Terms · Contact
+    </p>
+
+</footer>
+
 
 <script>
 
+/* SEARCH */
+function searchVideos() {
 
-/* =========================
-   ELEMENT
-========================= */
+    const input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
 
-const video =
-  document.getElementById("video");
+    const cards =
+        document.querySelectorAll(".card");
 
-const shell =
-  document.getElementById("playerShell");
+    cards.forEach(card => {
 
-const playBtn =
-  document.getElementById("playBtn");
+        const title =
+            card.getAttribute("data-title")
+            .toLowerCase();
 
-const progressFill =
-  document.getElementById("progressFill");
+        if (title.includes(input)) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
 
-const timeEl =
-  document.getElementById("time");
-
-const continueOverlay =
-  document.getElementById("continueOverlay");
-
-
-/* =========================
-   AD TRIGGER SYSTEM
-========================= */
-
-/*
-   Trigger 1 = 20 detik
-   Trigger 2 = 40 detik
-
-   Setelah trigger kedua,
-   tidak ada trigger lagi.
-*/
-
-let adGateCount = 0;
-
-const adGateTimes = [
-  20,
-  40
-];
-
-
-/* =========================
-   PLAY / PAUSE
-========================= */
-
-function togglePlay(){
-
-  if(video.paused){
-
-    video.play();
-
-  }else{
-
-    video.pause();
-
-  }
+    });
 
 }
-
-
-video.addEventListener(
-  "play",
-  ()=>{
-
-    playBtn.textContent = "❚❚";
-
-  }
-);
-
-
-video.addEventListener(
-  "pause",
-  ()=>{
-
-    playBtn.textContent = "▶";
-
-  }
-);
-
-
-/* =========================
-   TIME UPDATE
-========================= */
-
-video.addEventListener(
-  "timeupdate",
-  ()=>{
-
-    if(!video.duration)
-      return;
-
-
-    /* Progress bar */
-
-    progressFill.style.width =
-      (
-        video.currentTime /
-        video.duration *
-        100
-      ) + "%";
-
-
-    /* Time */
-
-    timeEl.textContent =
-      formatTime(video.currentTime)
-      + " / "
-      + formatTime(video.duration);
-
-
-    /*
-      =========================
-      AD GATE
-
-      Pertama:
-      20 detik
-
-      Kedua:
-      40 detik
-
-      Setelah kedua:
-      selesai.
-      =========================
-    */
-
-    if(
-      adGateCount < adGateTimes.length &&
-      video.currentTime >=
-      adGateTimes[adGateCount]
-    ){
-
-      video.pause();
-
-      adGateCount++;
-
-      continueOverlay
-        .classList
-        .add("show");
-
-    }
-
-  }
-);
-
-
-/* =========================
-   FORMAT TIME
-========================= */
-
-function formatTime(seconds){
-
-  if(!Number.isFinite(seconds))
-    return "0:00";
-
-
-  const minutes =
-    Math.floor(seconds / 60);
-
-
-  const secs =
-    Math.floor(seconds % 60)
-      .toString()
-      .padStart(2,"0");
-
-
-  return minutes + ":" + secs;
-
-}
-
-
-/* =========================
-   SEEK VIDEO
-========================= */
-
-function seekVideo(e){
-
-  /*
-    Tidak bisa seek ketika
-    overlay iklan sedang muncul.
-  */
-
-  if(
-    !video.duration ||
-    continueOverlay
-      .classList
-      .contains("show")
-  ){
-
-    return;
-
-  }
-
-
-  const rect =
-    e.currentTarget
-      .getBoundingClientRect();
-
-
-  const pct =
-    Math.min(
-      1,
-      Math.max(
-        0,
-        (
-          e.clientX -
-          rect.left
-        ) /
-        rect.width
-      )
-    );
-
-
-  video.currentTime =
-    pct * video.duration;
-
-}
-
-
-/* =========================
-   CONTINUE AFTER AD
-========================= */
-
-function continueAfterAd(){
-
-  /*
-    Overlay ditutup setelah
-    user menekan tombol.
-  */
-
-  continueOverlay
-    .classList
-    .remove("show");
-
-
-  /*
-    Video dilanjutkan sedikit
-    setelah tab iklan dibuka.
-  */
-
-  setTimeout(
-    ()=>{
-
-      video
-        .play()
-        .catch(()=>{});
-
-    },
-    350
-  );
-
-}
-
-
-/* =========================
-   FULLSCREEN
-========================= */
-
-async function toggleFullscreen(){
-
-  try{
-
-
-    /*
-      Jika sedang fullscreen,
-      keluar fullscreen.
-    */
-
-    if(document.fullscreenElement){
-
-      await document.exitFullscreen();
-
-      return;
-
-    }
-
-
-    /*
-      Gunakan Fullscreen API
-      pada player.
-    */
-
-    if(shell.requestFullscreen){
-
-      await shell.requestFullscreen();
-
-      return;
-
-    }
-
-
-    /*
-      Fallback browser.
-    */
-
-    shell.classList
-      .add("is-fullscreen");
-
-
-  }catch(e){
-
-    shell.classList
-      .toggle("is-fullscreen");
-
-  }
-
-}
-
-
-/* =========================
-   FULLSCREEN CHANGE
-========================= */
-
-document.addEventListener(
-  "fullscreenchange",
-  ()=>{
-
-
-    if(
-      document.fullscreenElement === shell
-    ){
-
-      shell.classList
-        .add("is-fullscreen");
-
-    }else{
-
-      shell.classList
-        .remove("is-fullscreen");
-
-    }
-
-  }
-);
-
-
-/* =========================
-   SHARE PAGE
-========================= */
-
-async function sharePage(){
-
-  try{
-
-
-    if(navigator.share){
-
-      await navigator.share({
-
-        title:
-          document.title,
-
-        text:
-          "Tonton video ini",
-
-        url:
-          location.href
-
-      });
-
-    }else{
-
-
-      await navigator.clipboard
-        .writeText(location.href);
-
-
-      alert(
-        "Link halaman berhasil disalin"
-      );
-
-    }
-
-
-  }catch(e){}
-
-}
-
 
 </script>
-
 
 </body>
 </html>
