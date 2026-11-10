@@ -1,1495 +1,353 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VIDHUB — Video Discovery</title>
-
-<meta name="description" content="Discover trending, latest and popular videos on VIDHUB.">
-<meta name="robots" content="index, follow">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070812">
+<title>🎥XXX</title>
+<meta name="description" content="Tonton video terbaru dan video lainnya.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="VIDHUB — Video Discovery">
-<meta property="og:description" content="Discover trending and popular videos.">
-<meta property="og:image" content="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200">
-
+<meta property="og:title" content="🎥XXX">
+<meta property="og:description" content="Tonton video terbaru dan video lainnya.">
+<meta property="og:image" content="https://jpcdn.it/img/36b3547bb5d3b13f17ffa4f7842d2549.png">
+<meta property="og:image:alt" content="Video Terbaru">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Video Player">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🎥XXX">
+<meta name="twitter:description" content="Tonton video terbaru dan video lainnya.">
+<meta name="twitter:image" content="https://jpcdn.it/img/36b3547bb5d3b13f17ffa4f7842d2549.png">
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#0b0b0d;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button,
-input{
-    font-family:inherit;
-}
-
-/* HEADER */
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(11,11,13,.97);
-    border-bottom:1px solid #242428;
-    backdrop-filter:blur(12px);
-}
-
-.header-inner{
-    max-width:1280px;
-    min-height:68px;
-    margin:auto;
-    padding:0 18px;
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:900;
-    letter-spacing:-1px;
-    white-space:nowrap;
-}
-
-.logo span{
-    color:#ff1744;
-}
-
-.search{
-    flex:1;
-    max-width:600px;
-    margin:auto;
-}
-
-.search-box{
-    width:100%;
-    background:#18181b;
-    border:1px solid #2b2b30;
-    color:#fff;
-    border-radius:25px;
-    padding:13px 18px;
-    outline:none;
-    font-size:14px;
-}
-
-.search-box:focus{
-    border-color:#ff1744;
-}
-
-.explore-btn{
-    border:0;
-    background:#ff1744;
-    color:white;
-    padding:11px 18px;
-    border-radius:8px;
-    font-weight:700;
-    cursor:pointer;
-}
-
-/* NAV */
-
-.nav{
-    border-bottom:1px solid #202023;
-    overflow-x:auto;
-}
-
-.nav-inner{
-    max-width:1280px;
-    margin:auto;
-    padding:11px 18px;
-    display:flex;
-    gap:9px;
-}
-
-.nav a{
-    white-space:nowrap;
-    background:#171719;
-    border:1px solid #29292d;
-    padding:8px 15px;
-    border-radius:20px;
-    font-size:13px;
-}
-
-.nav a:hover,
-.nav a.active{
-    background:#ff1744;
-    border-color:#ff1744;
-}
-
-/* CONTAINER */
-
-.container{
-    max-width:1280px;
-    margin:auto;
-    padding:25px 18px 70px;
-}
-
-/* HERO */
-
-.hero{
-    min-height:330px;
-    border-radius:16px;
-    overflow:hidden;
-    display:flex;
-    align-items:flex-end;
-    padding:38px;
-    margin-bottom:38px;
-
-    background:
-    linear-gradient(90deg,rgba(0,0,0,.92),rgba(0,0,0,.25)),
-    url("https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1600")
-    center/cover;
-}
-
-.hero-content{
-    max-width:620px;
-}
-
-.hero-label{
-    color:#ff1744;
-    font-size:12px;
-    font-weight:bold;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    margin-bottom:10px;
-}
-
-.hero h1{
-    font-size:42px;
-    line-height:1.1;
-    margin-bottom:14px;
-}
-
-.hero p{
-    color:#ccc;
-    line-height:1.6;
-    font-size:14px;
-    margin-bottom:20px;
-}
-
-.watch-btn{
-    display:inline-block;
-    background:#ff1744;
-    padding:13px 22px;
-    border-radius:8px;
-    font-weight:bold;
-}
-
-/* SECTION */
-
-.section{
-    margin-top:42px;
-}
-
-.section-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.section-header h2{
-    font-size:22px;
-}
-
-.section-header span{
-    color:#777;
-    font-size:12px;
-}
-
-/* VIDEO GRID */
-
-.video-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.card{
-    min-width:0;
-}
-
-.thumbnail{
-    position:relative;
-    aspect-ratio:16/9;
-    overflow:hidden;
-    border-radius:10px;
-    background:#18181b;
-}
-
-.thumbnail img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    transition:transform .3s;
-}
-
-.card:hover .thumbnail img{
-    transform:scale(1.05);
-}
-
-.duration{
-    position:absolute;
-    right:8px;
-    bottom:8px;
-    background:rgba(0,0,0,.88);
-    padding:4px 7px;
-    border-radius:4px;
-    font-size:11px;
-}
-
-.play{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:48px;
-    height:48px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:rgba(255,23,68,.95);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    opacity:0;
-    transition:.25s;
-}
-
-.card:hover .play{
-    opacity:1;
-}
-
-.play:after{
-    content:"";
-    margin-left:3px;
-    border-left:13px solid white;
-    border-top:8px solid transparent;
-    border-bottom:8px solid transparent;
-}
-
-.card h3{
-    font-size:14px;
-    line-height:1.4;
-    margin-top:10px;
-}
-
-.meta{
-    color:#777;
-    font-size:11px;
-    margin-top:6px;
-}
-
-/* AD */
-
-.ad{
-    max-width:728px;
-    min-height:90px;
-    margin:40px auto;
-    background:#111113;
-    border:1px dashed #333;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#666;
-    font-size:11px;
-}
-
-/* PLAYER */
-
-.player-section{
-    margin-top:50px;
-}
-
-.player-box{
-    background:#050505;
-    border:1px solid #252525;
-    border-radius:13px;
-    overflow:hidden;
-}
-
-#videoPlayer{
-    width:100%;
-    max-height:680px;
-    display:block;
-    background:#000;
-}
-
-.video-info{
-    padding:18px 0;
-}
-
-.video-info h2{
-    font-size:21px;
-}
-
-.video-description{
-    color:#999;
-    line-height:1.6;
-    font-size:13px;
-    margin-top:8px;
-}
-
-.video-meta{
-    color:#666;
-    font-size:12px;
-    margin-top:10px;
-}
-
-/* PAGINATION */
-
-.pagination{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-top:35px;
-}
-
-.pagination button{
-    border:1px solid #29292d;
-    background:#171719;
-    color:white;
-    min-width:38px;
-    height:38px;
-    border-radius:7px;
-    cursor:pointer;
-}
-
-.pagination button.active,
-.pagination button:hover{
-    background:#ff1744;
-    border-color:#ff1744;
-}
-
-/* FOOTER */
-
-footer{
-    border-top:1px solid #222;
-    text-align:center;
-    color:#777;
-    padding:32px 15px;
-    font-size:12px;
-}
-
-footer p + p{
-    margin-top:8px;
-}
-
-/* MOBILE */
-
-@media(max-width:1000px){
-    .video-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-}
-
-@media(max-width:700px){
-
-    .header-inner{
-        gap:10px;
-    }
-
-    .logo{
-        font-size:20px;
-    }
-
-    .explore-btn{
-        display:none;
-    }
-
-    .container{
-        padding:18px 12px 55px;
-    }
-
-    .hero{
-        min-height:270px;
-        padding:24px;
-    }
-
-    .hero h1{
-        font-size:29px;
-    }
-
-    .hero p{
-        font-size:13px;
-    }
-
-    .video-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:13px;
-    }
-
-    .card h3{
-        font-size:13px;
-    }
-
-    .play{
-        width:40px;
-        height:40px;
-    }
-
-    .play:after{
-        border-left-width:11px;
-        border-top-width:7px;
-        border-bottom-width:7px;
-    }
-}
+:root{--bg:#070812;--panel:rgba(18,20,35,.84);--text:#f7f8ff;--muted:#9ca3b8;--line:rgba(255,255,255,.09);--purple:#8b5cf6;--blue:#38bdf8;--pink:#ec4899;--radius:20px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);scroll-behavior:smooth}
+body{min-height:100vh;color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at 15% 0%,rgba(139,92,246,.20),transparent 30%),radial-gradient(circle at 90% 10%,rgba(56,189,248,.13),transparent 28%),radial-gradient(circle at 50% 65%,rgba(236,72,153,.08),transparent 32%),linear-gradient(145deg,#070812 0%,#0b0d18 48%,#070812 100%)}
+button{font:inherit}
+.topbar{position:sticky;top:0;z-index:30;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(7,8,18,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800}
+.brand-mark{width:35px;height:35px;border-radius:11px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--purple),var(--blue));box-shadow:0 8px 25px rgba(139,92,246,.28)}
+.share-top{width:40px;height:40px;border:1px solid var(--line);border-radius:13px;color:#fff;background:rgba(255,255,255,.05);cursor:pointer}
+main{width:min(1060px,100%);margin:auto;padding:22px 16px 52px}
+.player-shell{position:relative;overflow:hidden;background:#000;border:1px solid rgba(255,255,255,.10);border-radius:var(--radius);box-shadow:0 25px 80px rgba(0,0,0,.45),0 0 55px rgba(99,102,241,.08)}
+video{display:block;width:100%;aspect-ratio:16/10;object-fit:contain;background:#000;cursor:pointer}
+.video-top-gradient{position:absolute;inset:0 0 auto;height:105px;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.55),transparent)}
+.video-bottom-gradient{position:absolute;inset:auto 0 0;height:120px;pointer-events:none;background:linear-gradient(to top,rgba(0,0,0,.72),transparent)}
+.player-badge{position:absolute;top:13px;left:13px;z-index:3;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(8,9,18,.62);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);pointer-events:none}
+.center-play-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;width:78px;height:78px;border:1px solid rgba(255,255,255,.38);border-radius:50%;display:flex;align-items:center;justify-content:center;padding-left:5px;color:#fff;font-size:31px;background:rgba(0,0,0,.70);box-shadow:0 10px 35px rgba(0,0,0,.60),0 0 0 8px rgba(255,255,255,.05);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);cursor:pointer;transition:opacity .2s ease,transform .2s ease,background .2s ease}
+.center-play-btn:hover{background:rgba(0,0,0,.85);transform:translate(-50%,-50%) scale(1.06)}
+.center-play-btn:active{transform:translate(-50%,-50%) scale(.93)}
+.center-play-btn.hidden{opacity:0;pointer-events:none}
+.controls{position:absolute;left:14px;right:14px;bottom:12px;z-index:12;display:flex;align-items:center;gap:9px;opacity:1;visibility:visible;transition:opacity .25s ease,visibility .25s ease}
+.player-shell.controls-hidden .controls{opacity:0;visibility:hidden;pointer-events:none}
+.ctrl{width:40px;height:38px;border:1px solid rgba(255,255,255,.13);border-radius:11px;background:rgba(10,11,18,.64);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px)}
+.progress{flex:1;height:5px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;cursor:pointer}
+.progress-fill{width:0%;height:100%;background:linear-gradient(90deg,var(--purple),var(--blue));border-radius:99px}
+.time{font-size:11px;color:#fff;min-width:70px;text-align:center}
+.player-shell.is-fullscreen{border-radius:0;border:0;width:100vw;height:100vh;background:#000;display:flex;align-items:center;justify-content:center}
+.player-shell.is-fullscreen video{width:100%;height:100%;max-height:100vh;aspect-ratio:auto}
+.player-shell.is-fullscreen .controls{bottom:18px}
+.continue-overlay{position:absolute;inset:0;z-index:15;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(3,4,10,.66);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.continue-overlay.show{display:flex}
+.continue-box{width:min(430px,100%);padding:27px 23px 23px;text-align:center;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:radial-gradient(circle at 50% 0%,rgba(139,92,246,.22),transparent 52%),rgba(13,15,27,.94);box-shadow:0 25px 80px rgba(0,0,0,.55)}
+.ad-icon{width:48px;height:48px;margin:0 auto 14px;border-radius:15px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--purple),var(--blue));font-size:20px}
+.continue-box h2{font-size:21px;line-height:1.2}
+.continue-box p{color:var(--muted);font-size:13px;line-height:1.55;margin:9px 0 18px}
+.ad-button{display:block;width:100%;padding:12px 16px;border-radius:13px;color:#fff;font-weight:800;text-decoration:none;background:linear-gradient(135deg,var(--purple),#6366f1,var(--blue));box-shadow:0 10px 30px rgba(99,102,241,.25);border:0;cursor:pointer}
+.small-note{font-size:10px;color:#71778b;margin-top:10px}
+.info{padding:20px 2px 0}
+.title{font-size:clamp(21px,3vw,30px);line-height:1.2;letter-spacing:-.5px}
+.meta{margin-top:8px;color:var(--muted);font-size:13px}
+.divider{height:1px;background:var(--line);margin:22px 0 0}
+.collection{padding:24px 0 4px}
+.collection-heading{text-align:center;margin:0 auto 18px}
+.collection-heading h2{font-size:clamp(23px,5vw,30px);line-height:1.15;letter-spacing:-.5px}
+.collection-heading p{color:var(--muted);font-size:13px;margin-top:7px}
+.collection-banner{width:100%;min-height:105px;border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:18px 14px;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-decoration:none;background:linear-gradient(115deg,#1685ff 0%,#5569ff 38%,#9c3bea 68%,#df19bd 100%);box-shadow:0 12px 34px rgba(77,74,255,.24),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .2s,filter .2s}
+.collection-banner:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.collection-banner strong{font-size:clamp(23px,5.5vw,31px);line-height:1.1;letter-spacing:.2px}
+.collection-banner span{font-size:14px;font-weight:750}
+footer{text-align:center;color:#73798c;font-size:12px;padding:18px 0 0}
+@media(max-width:700px){.topbar{height:58px;padding:0 12px}main{padding:12px 10px 40px}.player-shell{border-radius:15px}video{aspect-ratio:5/4}.controls{left:9px;right:9px;bottom:8px;gap:6px}.ctrl{width:36px;height:35px}.time{font-size:10px;min-width:56px}.info{padding-top:16px}.collection{padding:15px;border-radius:17px}.continue-box{padding:23px 17px 18px}.collection-banner strong{gap:7px;font-size:clamp(18px,5vw,25px)}.collection-banner .arrow{font-size:clamp(18px,5vw,25px)}.center-play-btn{width:66px;height:66px;font-size:27px}}
 </style>
 </head>
-
 <body>
-
-<!-- HEADER -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-        <a href="#" class="logo">
-            VID<span>HUB</span>
-        </a>
-
-        <div class="search">
-            <input
-                id="searchInput"
-                class="search-box"
-                type="search"
-                placeholder="Search videos..."
-                oninput="searchVideos()">
-        </div>
-
-        <button class="explore-btn">
-            Explore
-        </button>
-
-    </div>
-
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">▶</div><span>Video Player</span></div>
+  <button class="share-top" type="button" onclick="sharePage()" aria-label="Bagikan">↗</button>
 </header>
 
+<main>
+<section class="player-shell" id="playerShell">
+  <video id="video" playsinline preload="metadata" src="https://cdn2.videy.co/ddTclQkL1.mp4"></video>
+  <div class="video-top-gradient"></div>
+  <div class="video-bottom-gradient"></div>
+  <div class="player-badge">HD • Mobile Friendly</div>
+  <button id="centerPlayBtn" class="center-play-btn" type="button" aria-label="Putar video">▶</button>
 
-<!-- NAVIGATION -->
-
-<nav class="nav">
-
-    <div class="nav-inner">
-
-        <a href="#" class="active">Home</a>
-        <a href="#trending">Trending</a>
-        <a href="#latest">Latest</a>
-        <a href="#popular">Popular</a>
-        <a href="#featured">Featured</a>
-
+  <div class="continue-overlay" id="continueOverlay">
+    <div class="continue-box">
+      <div class="ad-icon">▶</div>
+      <h2>Lanjutkan Video</h2>
+      <p>Tonton iklan terlebih dahulu untuk melanjutkan video. Setelah tombol ditekan, iklan akan dibuka dan video dapat dilanjutkan.</p>
+      <a class="ad-button" id="adButton" href="https://www.profitableratecpmnetwork.com/dzth71h9?key=0d1e630d97de4d34d79e6dd18d6a2fe8" target="_blank" rel="noopener noreferrer" onclick="continueAfterAd()">Lanjutkan &amp; Tonton Iklan</a>
+      <div class="small-note">Iklan dibuka setelah kamu menekan tombol.</div>
     </div>
+  </div>
 
-</nav>
-
-
-<main class="container">
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="hero-label">
-            Featured Video
-        </div>
-
-        <h1>
-            Discover Something New
-        </h1>
-
-        <p>
-            Explore trending videos, latest uploads and popular
-            content from around the world.
-        </p>
-
-        <a href="#video-player" class="watch-btn">
-            ▶ Watch Now
-        </a>
-
-    </div>
-
+  <div class="controls">
+    <button class="ctrl" id="playBtn" type="button" onclick="togglePlay()">▶</button>
+    <div class="progress" onclick="seekVideo(event)"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="time" id="time">0:00 / 0:00</div>
+    <button class="ctrl" type="button" onclick="toggleFullscreen()" aria-label="Fullscreen">⛶</button>
+  </div>
 </section>
 
-
-<!-- =========================
-     TRENDING — 10 VIDEOS
-========================= -->
-
-<section class="section" id="trending">
-
-    <div class="section-header">
-        <h2>🔥 Trending Now</h2>
-        <span>10 videos</span>
-    </div>
-
-    <div class="video-grid">
-
-
-<!-- VIDEO 01 -->
-<article class="card"
-data-title="Amazing Travel Adventure"
-data-video="VIDEO_URL_01"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_01"
-alt="Amazing Travel Adventure">
-
-<div class="play"></div>
-
-<span class="duration">08:42</span>
-
-</div>
-
-<h3>Amazing Travel Adventure</h3>
-
-<div class="meta">
-125K views • 2 hours ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 02 -->
-<article class="card"
-data-title="Beautiful City Experience"
-data-video="VIDEO_URL_02"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_02"
-alt="Beautiful City Experience">
-
-<div class="play"></div>
-
-<span class="duration">12:18</span>
-
-</div>
-
-<h3>Beautiful City Experience</h3>
-
-<div class="meta">
-98K views • 4 hours ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 03 -->
-<article class="card"
-data-title="Relaxing Nature"
-data-video="VIDEO_URL_03"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_03"
-alt="Relaxing Nature">
-
-<div class="play"></div>
-
-<span class="duration">06:31</span>
-
-</div>
-
-<h3>Relaxing Nature</h3>
-
-<div class="meta">
-82K views • 6 hours ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 04 -->
-<article class="card"
-data-title="Amazing Ocean View"
-data-video="VIDEO_URL_04"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_04"
-alt="Amazing Ocean View">
-
-<div class="play"></div>
-
-<span class="duration">10:25</span>
-
-</div>
-
-<h3>Amazing Ocean View</h3>
-
-<div class="meta">
-71K views • 8 hours ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 05 -->
-<article class="card"
-data-title="Mountain Adventure"
-data-video="VIDEO_URL_05"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_05"
-alt="Mountain Adventure">
-
-<div class="play"></div>
-
-<span class="duration">09:44</span>
-
-</div>
-
-<h3>Mountain Adventure</h3>
-
-<div class="meta">
-65K views • 10 hours ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 06 -->
-<article class="card"
-data-title="Weekend Adventure"
-data-video="VIDEO_URL_06"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_06"
-alt="Weekend Adventure">
-
-<div class="play"></div>
-
-<span class="duration">11:20</span>
-
-</div>
-
-<h3>Weekend Adventure</h3>
-
-<div class="meta">
-59K views • 12 hours ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 07 -->
-<article class="card"
-data-title="Beautiful Sunset"
-data-video="VIDEO_URL_07"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_07"
-alt="Beautiful Sunset">
-
-<div class="play"></div>
-
-<span class="duration">07:32</span>
-
-</div>
-
-<h3>Beautiful Sunset</h3>
-
-<div class="meta">
-52K views • 1 day ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 08 -->
-<article class="card"
-data-title="City Night Tour"
-data-video="VIDEO_URL_08"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_08"
-alt="City Night Tour">
-
-<div class="play"></div>
-
-<span class="duration">13:06</span>
-
-</div>
-
-<h3>City Night Tour</h3>
-
-<div class="meta">
-48K views • 1 day ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 09 -->
-<article class="card"
-data-title="Ocean Journey"
-data-video="VIDEO_URL_09"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_09"
-alt="Ocean Journey">
-
-<div class="play"></div>
-
-<span class="duration">08:15</span>
-
-</div>
-
-<h3>Ocean Journey</h3>
-
-<div class="meta">
-43K views • 1 day ago
-</div>
-
-</a>
-
-</article>
-
-
-<!-- VIDEO 10 -->
-<article class="card"
-data-title="Amazing Discovery"
-data-video="VIDEO_URL_10"
-data-description="Add your video description here.">
-
-<a href="#video-player" onclick="openVideo(this);return false;">
-
-<div class="thumbnail">
-
-<img src="THUMBNAIL_URL_10"
-alt="Amazing Discovery">
-
-<div class="play"></div>
-
-<span class="duration">15:02</span>
-
-</div>
-
-<h3>Amazing Discovery</h3>
-
-<div class="meta">
-39K views • 1 day ago
-</div>
-
-</a>
-
-</article>
-
-    </div>
-
+<section class="info">
+  <h1 class="title">Video Terbaru</h1>
+  <div class="meta">Nikmati video dengan tampilan nyaman di HP maupun desktop.</div>
 </section>
-
-
-<!-- AD 1 -->
-
-<div class="ad">
-ADVERTISEMENT — 728 × 90
-</div>
-
-
-<!-- =========================
-     LATEST — 10 VIDEOS
-========================= -->
-
-<section class="section" id="latest">
-
-<div class="section-header">
-<h2>✨ Latest Videos</h2>
-<span>10 videos</span>
-</div>
-
-<div class="video-grid">
-
-
-<!-- VIDEO 11 -->
-<article class="card" data-title="Latest Video 11" data-video="VIDEO_URL_11" data-description="Video description 11.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_11" alt="Latest Video 11">
-<div class="play"></div>
-<span class="duration">05:44</span>
-</div>
-<h3>Latest Video 11</h3>
-<div class="meta">32K views • 20 minutes ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 12 -->
-<article class="card" data-title="Latest Video 12" data-video="VIDEO_URL_12" data-description="Video description 12.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_12" alt="Latest Video 12">
-<div class="play"></div>
-<span class="duration">09:12</span>
-</div>
-<h3>Latest Video 12</h3>
-<div class="meta">28K views • 40 minutes ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 13 -->
-<article class="card" data-title="Latest Video 13" data-video="VIDEO_URL_13" data-description="Video description 13.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_13" alt="Latest Video 13">
-<div class="play"></div>
-<span class="duration">07:35</span>
-</div>
-<h3>Latest Video 13</h3>
-<div class="meta">24K views • 1 hour ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 14 -->
-<article class="card" data-title="Latest Video 14" data-video="VIDEO_URL_14" data-description="Video description 14.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_14" alt="Latest Video 14">
-<div class="play"></div>
-<span class="duration">11:02</span>
-</div>
-<h3>Latest Video 14</h3>
-<div class="meta">21K views • 2 hours ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 15 -->
-<article class="card" data-title="Latest Video 15" data-video="VIDEO_URL_15" data-description="Video description 15.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_15" alt="Latest Video 15">
-<div class="play"></div>
-<span class="duration">10:18</span>
-</div>
-<h3>Latest Video 15</h3>
-<div class="meta">19K views • 3 hours ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 16 -->
-<article class="card" data-title="Latest Video 16" data-video="VIDEO_URL_16" data-description="Video description 16.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_16" alt="Latest Video 16">
-<div class="play"></div>
-<span class="duration">06:48</span>
-</div>
-<h3>Latest Video 16</h3>
-<div class="meta">17K views • 4 hours ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 17 -->
-<article class="card" data-title="Latest Video 17" data-video="VIDEO_URL_17" data-description="Video description 17.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_17" alt="Latest Video 17">
-<div class="play"></div>
-<span class="duration">12:45</span>
-</div>
-<h3>Latest Video 17</h3>
-<div class="meta">15K views • 5 hours ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 18 -->
-<article class="card" data-title="Latest Video 18" data-video="VIDEO_URL_18" data-description="Video description 18.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_18" alt="Latest Video 18">
-<div class="play"></div>
-<span class="duration">08:51</span>
-</div>
-<h3>Latest Video 18</h3>
-<div class="meta">13K views • 6 hours ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 19 -->
-<article class="card" data-title="Latest Video 19" data-video="VIDEO_URL_19" data-description="Video description 19.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_19" alt="Latest Video 19">
-<div class="play"></div>
-<span class="duration">14:16</span>
-</div>
-<h3>Latest Video 19</h3>
-<div class="meta">11K views • 7 hours ago</div>
-</a>
-</article>
-
-
-<!-- VIDEO 20 -->
-<article class="card" data-title="Latest Video 20" data-video="VIDEO_URL_20" data-description="Video description 20.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_20" alt="Latest Video 20">
-<div class="play"></div>
-<span class="duration">09:28</span>
-</div>
-<h3>Latest Video 20</h3>
-<div class="meta">9K views • 8 hours ago</div>
-</a>
-</article>
-
-</div>
-
+<div class="divider"></div>
+<section class="collection" id="collection">
+  <div class="collection-heading">
+    <h2>✨ Video Lainnya</h2>
+    <p>Kumpulan video terbaru dan video pilihan</p>
+  </div>
+  <a class="collection-banner" href="https://www.profitableratecpmnetwork.com/dzth71h9?key=0d1e630d97de4d34d79e6dd18d6a2fe8" target="_blank" rel="noopener noreferrer">
+    <strong><span class="arrow">➡️</span> <span class="banner-title">KUMPULAN VIDEO</span> <span class="arrow">⬅️</span></strong>
+    <span>🎬 Lihat video lainnya di sini</span>
+  </a>
 </section>
-
-
-<!-- =========================
-     POPULAR — 10 VIDEOS
-========================= -->
-
-<section class="section" id="popular">
-
-<div class="section-header">
-<h2>⭐ Popular Videos</h2>
-<span>10 videos</span>
-</div>
-
-<div class="video-grid">
-
-
-<!-- VIDEO 21 -->
-<article class="card" data-title="Popular Video 21" data-video="VIDEO_URL_21" data-description="Video description 21.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_21" alt="Popular Video 21">
-<div class="play"></div>
-<span class="duration">14:20</span>
-</div>
-<h3>Popular Video 21</h3>
-<div class="meta">1.2M views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 22 -->
-<article class="card" data-title="Popular Video 22" data-video="VIDEO_URL_22" data-description="Video description 22.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_22" alt="Popular Video 22">
-<div class="play"></div>
-<span class="duration">09:54</span>
-</div>
-<h3>Popular Video 22</h3>
-<div class="meta">980K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 23 -->
-<article class="card" data-title="Popular Video 23" data-video="VIDEO_URL_23" data-description="Video description 23.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_23" alt="Popular Video 23">
-<div class="play"></div>
-<span class="duration">11:32</span>
-</div>
-<h3>Popular Video 23</h3>
-<div class="meta">845K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 24 -->
-<article class="card" data-title="Popular Video 24" data-video="VIDEO_URL_24" data-description="Video description 24.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_24" alt="Popular Video 24">
-<div class="play"></div>
-<span class="duration">08:41</span>
-</div>
-<h3>Popular Video 24</h3>
-<div class="meta">720K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 25 -->
-<article class="card" data-title="Popular Video 25" data-video="VIDEO_URL_25" data-description="Video description 25.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_25" alt="Popular Video 25">
-<div class="play"></div>
-<span class="duration">16:03</span>
-</div>
-<h3>Popular Video 25</h3>
-<div class="meta">650K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 26 -->
-<article class="card" data-title="Popular Video 26" data-video="VIDEO_URL_26" data-description="Video description 26.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_26" alt="Popular Video 26">
-<div class="play"></div>
-<span class="duration">07:48</span>
-</div>
-<h3>Popular Video 26</h3>
-<div class="meta">590K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 27 -->
-<article class="card" data-title="Popular Video 27" data-video="VIDEO_URL_27" data-description="Video description 27.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_27" alt="Popular Video 27">
-<div class="play"></div>
-<span class="duration">10:27</span>
-</div>
-<h3>Popular Video 27</h3>
-<div class="meta">510K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 28 -->
-<article class="card" data-title="Popular Video 28" data-video="VIDEO_URL_28" data-description="Video description 28.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_28" alt="Popular Video 28">
-<div class="play"></div>
-<span class="duration">13:12</span>
-</div>
-<h3>Popular Video 28</h3>
-<div class="meta">480K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 29 -->
-<article class="card" data-title="Popular Video 29" data-video="VIDEO_URL_29" data-description="Video description 29.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_29" alt="Popular Video 29">
-<div class="play"></div>
-<span class="duration">09:43</span>
-</div>
-<h3>Popular Video 29</h3>
-<div class="meta">420K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 30 -->
-<article class="card" data-title="Popular Video 30" data-video="VIDEO_URL_30" data-description="Video description 30.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_30" alt="Popular Video 30">
-<div class="play"></div>
-<span class="duration">12:36</span>
-</div>
-<h3>Popular Video 30</h3>
-<div class="meta">390K views</div>
-</a>
-</article>
-
-</div>
-
-</section>
-
-
-<!-- AD 2 -->
-
-<div class="ad">
-ADVERTISEMENT — 728 × 90
-</div>
-
-
-<!-- =========================
-     FEATURED — 10 VIDEOS
-========================= -->
-
-<section class="section" id="featured">
-
-<div class="section-header">
-<h2>🎬 Featured Videos</h2>
-<span>10 videos</span>
-</div>
-
-<div class="video-grid">
-
-
-<!-- VIDEO 31 -->
-<article class="card" data-title="Featured Video 31" data-video="VIDEO_URL_31" data-description="Video description 31.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_31" alt="Featured Video 31">
-<div class="play"></div>
-<span class="duration">08:18</span>
-</div>
-<h3>Featured Video 31</h3>
-<div class="meta">310K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 32 -->
-<article class="card" data-title="Featured Video 32" data-video="VIDEO_URL_32" data-description="Video description 32.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_32" alt="Featured Video 32">
-<div class="play"></div>
-<span class="duration">10:44</span>
-</div>
-<h3>Featured Video 32</h3>
-<div class="meta">285K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 33 -->
-<article class="card" data-title="Featured Video 33" data-video="VIDEO_URL_33" data-description="Video description 33.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_33" alt="Featured Video 33">
-<div class="play"></div>
-<span class="duration">07:26</span>
-</div>
-<h3>Featured Video 33</h3>
-<div class="meta">260K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 34 -->
-<article class="card" data-title="Featured Video 34" data-video="VIDEO_URL_34" data-description="Video description 34.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_34" alt="Featured Video 34">
-<div class="play"></div>
-<span class="duration">12:08</span>
-</div>
-<h3>Featured Video 34</h3>
-<div class="meta">230K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 35 -->
-<article class="card" data-title="Featured Video 35" data-video="VIDEO_URL_35" data-description="Video description 35.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_35" alt="Featured Video 35">
-<div class="play"></div>
-<span class="duration">09:17</span>
-</div>
-<h3>Featured Video 35</h3>
-<div class="meta">205K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 36 -->
-<article class="card" data-title="Featured Video 36" data-video="VIDEO_URL_36" data-description="Video description 36.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_36" alt="Featured Video 36">
-<div class="play"></div>
-<span class="duration">15:42</span>
-</div>
-<h3>Featured Video 36</h3>
-<div class="meta">180K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 37 -->
-<article class="card" data-title="Featured Video 37" data-video="VIDEO_URL_37" data-description="Video description 37.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_37" alt="Featured Video 37">
-<div class="play"></div>
-<span class="duration">06:52</span>
-</div>
-<h3>Featured Video 37</h3>
-<div class="meta">160K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 38 -->
-<article class="card" data-title="Featured Video 38" data-video="VIDEO_URL_38" data-description="Video description 38.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_38" alt="Featured Video 38">
-<div class="play"></div>
-<span class="duration">11:11</span>
-</div>
-<h3>Featured Video 38</h3>
-<div class="meta">145K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 39 -->
-<article class="card" data-title="Featured Video 39" data-video="VIDEO_URL_39" data-description="Video description 39.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_39" alt="Featured Video 39">
-<div class="play"></div>
-<span class="duration">09:39</span>
-</div>
-<h3>Featured Video 39</h3>
-<div class="meta">130K views</div>
-</a>
-</article>
-
-
-<!-- VIDEO 40 -->
-<article class="card" data-title="Featured Video 40" data-video="VIDEO_URL_40" data-description="Video description 40.">
-<a href="#video-player" onclick="openVideo(this);return false;">
-<div class="thumbnail">
-<img src="THUMBNAIL_URL_40" alt="Featured Video 40">
-<div class="play"></div>
-<span class="duration">13:25</span>
-</div>
-<h3>Featured Video 40</h3>
-<div class="meta">120K views</div>
-</a>
-</article>
-
-</div>
-
-</section>
-
-
-<!-- PLAYER -->
-
-<section id="video-player" class="player-section">
-
-<div class="section-header">
-<h2>▶ Video Player</h2>
-</div>
-
-<div class="player-box">
-
-<video
-id="videoPlayer"
-controls
-playsinline
-preload="metadata">
-
-<source
-id="videoSource"
-src=""
-type="video/mp4">
-
-Your browser does not support HTML5 video.
-
-</video>
-
-</div>
-
-
-<div class="video-info">
-
-<h2 id="playerTitle">
-Select a video
-</h2>
-
-<p class="video-description"
-id="playerDescription">
-
-Choose one of the videos above to start watching.
-
-</p>
-
-<div class="video-meta"
-id="playerMeta">
-
-VIDHUB • Video Player
-
-</div>
-
-</div>
-
-</section>
-
-
+<footer>© 2026 • Video Player</footer>
 </main>
 
-
-<footer>
-
-<p>
-© 2026 VIDHUB. All rights reserved.
-</p>
-
-<p>
-Home · About · Privacy · Terms · Contact
-</p>
-
-</footer>
-
-
 <script>
+const video = document.getElementById("video");
+const shell = document.getElementById("playerShell");
+const playBtn = document.getElementById("playBtn");
+const centerPlayBtn = document.getElementById("centerPlayBtn");
+const progressFill = document.getElementById("progressFill");
+const timeEl = document.getElementById("time");
+const continueOverlay = document.getElementById("continueOverlay");
 
-/* ==========================================
-   VIDEO PLAYER
-========================================== */
+/* TRIGGER IKLAN ASLI: tetap 20 dan 40 detik, maksimal dua kali */
+let adGateCount = 0;
+const adGateTimes = [15, 40];
 
-function openVideo(link){
-
-    const card = link.closest(".card");
-
-    const videoUrl =
-        card.getAttribute("data-video");
-
-    const title =
-        card.getAttribute("data-title");
-
-    const description =
-        card.getAttribute("data-description");
-
-    const player =
-        document.getElementById("videoPlayer");
-
-    const source =
-        document.getElementById("videoSource");
-
-    document.getElementById("playerTitle")
-        .textContent = title;
-
-    document.getElementById("playerDescription")
-        .textContent = description;
-
-    source.src = videoUrl;
-
-    player.load();
-
-    document
-        .getElementById("video-player")
-        .scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
-
+function togglePlay() {
+  if (continueOverlay.classList.contains("show")) return;
+  if (video.paused) {
+    video.play().catch(() => {});
+  } else {
+    video.pause();
+  }
 }
 
-
-/* ==========================================
-   SEARCH
-========================================== */
-
-function searchVideos(){
-
-    const query =
-        document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const cards =
-        document.querySelectorAll(".card");
-
-    cards.forEach(function(card){
-
-        const title =
-            card
-            .getAttribute("data-title")
-            .toLowerCase();
-
-        if(title.includes(query)){
-
-            card.style.display="";
-
-        }else{
-
-            card.style.display="none";
-
-        }
-
-    });
-
+function updateCenterPlay() {
+  if (video.paused) {
+    centerPlayBtn.classList.remove("hidden");
+    centerPlayBtn.textContent = "▶";
+    centerPlayBtn.setAttribute("aria-label", "Putar video");
+  } else {
+    centerPlayBtn.textContent = "Ⅱ";
+    centerPlayBtn.setAttribute("aria-label", "Jeda video");
+    // Saat video berjalan, tombol tengah hanya terlihat setelah layar disentuh.
+    centerPlayBtn.classList.add("hidden");
+  }
 }
 
+centerPlayBtn.addEventListener("click", function(e) {
+  e.stopPropagation();
+  if (continueOverlay.classList.contains("show")) return;
+
+  // Klik tombol tengah benar-benar menjalankan Play/Pause.
+  togglePlay();
+});
+
+// Ketuk area video hanya menampilkan kontrol; tidak menjeda video.
+video.addEventListener("click", function(e) {
+  if (continueOverlay.classList.contains("show")) return;
+
+  if (!video.paused) {
+    showControls();
+    centerPlayBtn.textContent = "Ⅱ";
+    centerPlayBtn.setAttribute("aria-label", "Jeda video");
+    centerPlayBtn.classList.remove("hidden");
+
+    clearTimeout(centerButtonHideTimer);
+    centerButtonHideTimer = setTimeout(() => {
+      if (!video.paused) centerPlayBtn.classList.add("hidden");
+    }, 2000);
+  } else {
+    showControls();
+    updateCenterPlay();
+  }
+});
+
+video.addEventListener("play", () => {
+  playBtn.textContent = "Ⅱ";
+  updateCenterPlay();
+  showControls();
+});
+
+video.addEventListener("pause", () => {
+  playBtn.textContent = "▶";
+  clearTimeout(centerButtonHideTimer);
+  updateCenterPlay();
+  keepControlsVisible();
+});
+
+video.addEventListener("ended", () => {
+  updateCenterPlay();
+  keepControlsVisible();
+});
+
+video.addEventListener("timeupdate", () => {
+  if (!video.duration) return;
+
+  progressFill.style.width = (video.currentTime / video.duration * 100) + "%";
+  timeEl.textContent = formatTime(video.currentTime) + " / " + formatTime(video.duration);
+
+  /* Trigger iklan asli dipertahankan */
+  if (adGateCount < adGateTimes.length &&
+      video.currentTime >= adGateTimes[adGateCount]) {
+    video.pause();
+    adGateCount++;
+    continueOverlay.classList.add("show");
+    updateCenterPlay();
+    keepControlsVisible();
+  }
+});
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "0:00";
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+  return minutes + ":" + secs;
+}
+
+function seekVideo(e) {
+  if (!video.duration || continueOverlay.classList.contains("show")) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+  video.currentTime = pct * video.duration;
+  showControls();
+}
+
+function continueAfterAd() {
+  continueOverlay.classList.remove("show");
+  setTimeout(() => {
+    video.play().catch(() => {});
+  }, 350);
+}
+
+async function toggleFullscreen() {
+  try {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+      return;
+    }
+    if (shell.requestFullscreen) {
+      await shell.requestFullscreen();
+      return;
+    }
+    shell.classList.add("is-fullscreen");
+  } catch (e) {
+    shell.classList.toggle("is-fullscreen");
+  }
+}
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement === shell) {
+    shell.classList.add("is-fullscreen");
+  } else {
+    shell.classList.remove("is-fullscreen");
+  }
+});
+
+async function sharePage() {
+  try {
+    if (navigator.share) {
+      await navigator.share({
+        title: document.title,
+        text: "Tonton video ini",
+        url: location.href
+      });
+    } else {
+      await navigator.clipboard.writeText(location.href);
+      alert("Link halaman berhasil disalin");
+    }
+  } catch (e) {}
+}
+
+/* TAMBAHAN SAJA: sembunyikan kontrol setelah 25 detik saat video berjalan */
+let controlsHideTimer;
+let centerButtonHideTimer;
+
+function showControls() {
+  shell.classList.remove("controls-hidden");
+  clearTimeout(controlsHideTimer);
+
+  if (!video.paused && !continueOverlay.classList.contains("show")) {
+    controlsHideTimer = setTimeout(() => {
+      if (!video.paused && !continueOverlay.classList.contains("show")) {
+        shell.classList.add("controls-hidden");
+      }
+    }, 2000);
+  }
+}
+
+function keepControlsVisible() {
+  clearTimeout(controlsHideTimer);
+  shell.classList.remove("controls-hidden");
+}
+
+/* Sentuhan pada player menampilkan kontrol kembali jika tersembunyi */
+shell.addEventListener("pointerdown", (e) => {
+  if (e.target.closest("button, .progress, a")) return;
+  if (continueOverlay.classList.contains("show")) return;
+
+  // Ketukan di area player hanya memunculkan kontrol.
+  // Video tetap berjalan sampai tombol Play/Pause ditekan.
+  showControls();
+
+  if (!video.paused) {
+    centerPlayBtn.textContent = "Ⅱ";
+    centerPlayBtn.setAttribute("aria-label", "Jeda video");
+    centerPlayBtn.classList.remove("hidden");
+
+    clearTimeout(centerButtonHideTimer);
+    centerButtonHideTimer = setTimeout(() => {
+      if (!video.paused) centerPlayBtn.classList.add("hidden");
+    }, 2000);
+  } else {
+    updateCenterPlay();
+  }
+});
+
+updateCenterPlay();
 </script>
+
+
+<!-- Histats.com START (async) -->
+<script type="text/javascript">
+var _Hasync = _Hasync || [];
+_Hasync.push(['Histats.start', '1,5043495,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+  var hs = document.createElement('script');
+  hs.type = 'text/javascript';
+  hs.async = true;
+  hs.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's10.histats.com/js15_as.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();
+</script>
+<noscript><a href="/" target="_blank" rel="noopener noreferrer"><img src="https://sstatic1.histats.com/0.gif?5043495&101" alt="web tracker" border="0"></a></noscript>
+<!-- Histats.com END -->
+
+
+<!-- Popunder Adsterra -->
 
 </body>
 </html>
